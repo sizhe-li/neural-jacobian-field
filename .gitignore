@@ -156,4 +156,4 @@ latest-run/
 artifacts/
 *.pyc
 
-model_checkpoints/*
+model_checkpoints/
