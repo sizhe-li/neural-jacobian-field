@@ -1,0 +1,53 @@
+defaults:
+  - dataset: toy_arm
+  - model: toy_arm
+
+# List of tasks including train, test or both.
+tasks: [train]
+
+wandb:
+  entity: scene-representation-group
+  project: self-model
+  mode: online
+
+  # To load a checkpoint, set the run ID here.
+  resume: null
+
+dataset:
+  overfit_to_scene: null
+
+num_context_views: 1
+rays_per_batch: 1024
+
+training:
+  data:
+    batch_size: 4
+    num_workers: 8
+  optim:
+    lr: 1e-4
+    warm_up_steps: 10000
+    accumulate_grad_batches: 1
+  checkpointing:
+    every_n_train_steps: 5000
+
+testing:
+  data:
+    batch_size: 1
+    num_workers: 4
+
+  # Total number of pixels (width * height). Omit for original size.
+  resolution: 16384
+
+validation:
+  interval: 1000
+  data:
+    batch_size: 1
+    num_workers: 4
+  video:
+    # As a fraction of regular validation frequency.
+    frequency: 0.25
+    num_frames: 30
+    frame_rate: 30
+
+  # Total number of pixels (width * height). Omit for original size.
+  resolution: 16384
