@@ -4,6 +4,8 @@ This is the code for **Unifying 3D Representation and Control of Diverse Robots 
 
 Check out the [project website here](https://sizhe-li.github.io/publication/neural_jacobian_field/).
 
+![plot](./assets/teaser.png)
+
 ## Installation
 
 ```bash
