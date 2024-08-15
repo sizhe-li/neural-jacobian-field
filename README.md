@@ -21,9 +21,9 @@ python3 -m pip install -e .
 
 Neural Jacobian Fields was trained with our own multi-view robot dataset. Our dataset includes a pneumatic robot hand (mounted on a robot arm), the Allegro robot hand, the Handed Shearing Auxetics platform, and the Poppy robot arm.
 
-We plan to release all our robot data to encourage future research endeavors. The Poppy robot arm data is included in the initial code release.
+We plan to release all our robot data to encourage future research endeavors.
 
-**We are actively working on uploading our dataset to the web. Updates on this coming very soon!**
+**(08/15/2024) We are actively working on uploading our dataset to the web. Updates on this coming very soon!**
 
 ## Acquiring Pre-trained Checkpoints
 
