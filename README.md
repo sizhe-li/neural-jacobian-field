@@ -23,7 +23,7 @@ Neural Jacobian Fields was trained with our own multi-view robot dataset. Our da
 
 We plan to release all our robot data to encourage future research endeavors.
 
-**(08/15/2024) We are actively working on uploading our dataset to the web. Updates on this coming very soon!**
+**(09/20/2024) We are actively working on uploading our dataset to the web. Updates on this coming very soon!** Feel free to contact sizheli@mit.edu if you need the dataset urgently.
 
 ## Acquiring Pre-trained Checkpoints
 
