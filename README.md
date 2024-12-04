@@ -6,6 +6,10 @@ Check out the [project website here](https://sizhe-li.github.io/publication/neur
 
 ![plot](./assets/teaser.png)
 
+## News
+- [12/03/2024] We will release a cleaner, type-checked implementation in two weeks. Stay tuned!
+
+
 ## Installation
 
 ```bash
