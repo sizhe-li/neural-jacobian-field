@@ -6,6 +6,9 @@ Check out the [project website here](https://sizhe-li.github.io/publication/neur
 
 ![plot](./assets/teaser.png)
 
+## News
+- [12/27/2024] This branch is temporary; please only refer to `./project` for the purpose of a clean implementation of our framework. The notebooks and model checkpoints are out-of-date and will be updated soon!
+
 ## Installation
 
 ```bash
