@@ -7,8 +7,9 @@ Check out the [project website here](https://sizhe-li.github.io/publication/neur
 ![plot](./assets/teaser.png)
 
 ## News
-- [12/03/2024] We will release a cleaner, type-checked implementation in two weeks. Stay tuned!
-
+<!-- - [12/03/2024] We will release a cleaner, type-checked implementation in two weeks. Stay tuned! -->
+- [12/27/2024] **We have released a clean implementation of the pipeline! Please check out branch "clean".** The implementation is completely modularized and type-annotated. This will be reflected in the main branch soon. We will make the demo notebooks compatible with the clean implementations and release corresponding pre-trained checkpoints!
+- [12/27/2024] We have exciting new results on the emerging properties of neural jacobian fields! Please stay tuned!
 
 ## Installation
 
