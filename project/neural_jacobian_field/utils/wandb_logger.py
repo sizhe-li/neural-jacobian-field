@@ -1,13 +1,12 @@
-from pathlib import Path
-from datetime import timedelta
-from typing import TYPE_CHECKING, Any, Dict, List, Literal, Mapping, Optional, Union
-from typing_extensions import override
-from functools import wraps
-import torch
 import os
-import wandb
-from wandb_osh.hooks import TriggerWandbSyncHook
 import time
+from datetime import timedelta
+from pathlib import Path
+from typing import TYPE_CHECKING, Any, Literal, Mapping, Optional, Union
+
+import torch
+import wandb
+from lightning.fabric.utilities.types import _PATH
 from lightning.pytorch.loggers.wandb import (
     WandbLogger,
     _scan_checkpoints,
@@ -15,8 +14,8 @@ from lightning.pytorch.loggers.wandb import (
     Tensor,
 )
 from lightning.pytorch.utilities.rank_zero import rank_zero_only
-from lightning.fabric.utilities.types import _PATH
-
+from typing_extensions import override
+from wandb_osh.hooks import TriggerWandbSyncHook
 
 if TYPE_CHECKING:
     from wandb import Artifact

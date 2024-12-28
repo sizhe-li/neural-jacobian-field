@@ -1,0 +1,19 @@
+name: toy_arm
+mode: perception
+
+root: "/weka/scratch/user/sizhe086/project/data/neural_jacobian_field/toy_arm/05_19_2024"
+other_roots: null
+
+num_total_joints: 6
+disabled_joints: null
+
+# creating supervision
+max_frame_displacement: 1
+max_num_frames_per_traj: 9
+action_supervision_type: "tracks"
+
+num_positive_samples: 512
+num_negative_samples: 512
+
+augment_ctxt_image: false
+testing_mask_ratio: null

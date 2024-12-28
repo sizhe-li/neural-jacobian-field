@@ -1,7 +1,5 @@
-name: pixelnerf
-
+name: "resnet"
 use_first_pool: true
-weights: IMAGENET1K_V1
 num_layers: 4
 norm_type: batch
 upsample_interp: bilinear

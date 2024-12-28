@@ -1,3 +1,5 @@
+from dataclasses import is_dataclass
+
 import torch
 
 
@@ -15,3 +17,21 @@ def get_sanity_metrics(x: dict):
             metrics[f"{k}_max"] = v.max()
             metrics[f"{k}_min"] = v.min()
     return metrics
+
+
+def safe_asdict(obj):
+    """A safe version of asdict that handles PyTorch tensors."""
+    if is_dataclass(obj):
+        result = {}
+        for key, value in obj.__dict__.items():
+            if isinstance(value, torch.Tensor):
+                result[key] = value.detach().cpu()  # Convert tensor to numpy array
+            else:
+                result[key] = safe_asdict(
+                    value
+                )  # Recursively handle nested dataclasses
+        return result
+    elif isinstance(obj, dict):
+        return {key: safe_asdict(value) for key, value in obj.items()}
+    else:
+        return obj  # Return the object as is if it's not a dataclass or a tensor

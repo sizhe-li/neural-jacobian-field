@@ -1,4 +1,6 @@
 from torch import nn
+from dataclasses import dataclass
+from typing import Literal
 
 
 class ResMLP(nn.Module):

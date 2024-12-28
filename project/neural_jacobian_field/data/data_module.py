@@ -1,26 +1,37 @@
-from omegaconf import DictConfig
 from pytorch_lightning import LightningDataModule
 from torch.utils.data import DataLoader
+from typing import Dict
 
-from .dataset.dataset_toy_arm import DatasetToyArmPointTrack
+# from .dataset.dataset_toy_arm import DatasetToyArmPointTrack
+from .dataset.dataset import DatasetCommon
+from .dataset import DatasetAllegro
+from .dataset.dataset_hsa import DatasetHsa
+from .dataset.dataset_toy_arm import DatasetToyArm
+from .dataset.dataset_pneumatic import DatasetPneumaticHandOnly
 from .validation_wrapper import ValidationWrapper
+from ..config.common import PipelineCfg
 
 DATASETS = {
-    "toy_arm": DatasetToyArmPointTrack,
+    "allegro": DatasetAllegro,
+    "hsa": DatasetHsa,
+    "toy_arm": DatasetToyArm,
+    "pneumatic_hand_only": DatasetPneumaticHandOnly,
 }
+
+# def get_dataset(
+#         cfg: DatasetCfg,
+#
+# )
 
 
 class DataModule(LightningDataModule):
-    cfg: DictConfig
+    cfg: PipelineCfg
 
-    def __init__(self, cfg: DictConfig):
+    def __init__(self, cfg: PipelineCfg):
         super().__init__()
         self.cfg = cfg
 
     def train_dataloader(self):
-        # TODO: temp hack
-        self.cfg.dataset.train_flow = self.cfg.model.get("train_flow", False)
-
         return DataLoader(
             DATASETS[self.cfg.dataset.name](cfg=self.cfg.dataset, stage="train"),
             shuffle=True,
@@ -29,9 +40,6 @@ class DataModule(LightningDataModule):
         )
 
     def val_dataloader(self):
-        # TODO: temp hack
-        self.cfg.dataset.train_flow = self.cfg.model.get("train_flow", False)
-
         return DataLoader(
             ValidationWrapper(
                 DATASETS[self.cfg.dataset.name](cfg=self.cfg.dataset, stage="val"),
@@ -43,8 +51,10 @@ class DataModule(LightningDataModule):
 
     def test_dataloader(self):
         return DataLoader(
-            DATASETS[self.cfg.dataset.name](cfg=self.cfg.dataset, stage="test"),
-            batch_size=self.cfg.testing.data.batch_size,
-            num_workers=self.cfg.testing.data.num_workers,
-            shuffle=False,
+            ValidationWrapper(
+                DATASETS[self.cfg.dataset.name](cfg=self.cfg.dataset, stage="test"),
+                1,
+            ),
+            batch_size=self.cfg.validation.data.batch_size,
+            num_workers=self.cfg.validation.data.num_workers,
         )

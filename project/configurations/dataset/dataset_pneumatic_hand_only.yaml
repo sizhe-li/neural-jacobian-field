@@ -1,0 +1,20 @@
+name: pneumatic_hand_only
+mode: perception
+
+root: "/weka/scratch/user/sizhe086/project/data/neural_jacobian_field/pneumatic/03_09_high_middle"
+other_roots:
+  - "/weka/scratch/user/sizhe086/project/data/neural_jacobian_field/pneumatic/03_09_low_middle"
+
+num_total_joints: 6
+disabled_joints: null
+
+# creating supervision
+max_frame_displacement: 1
+max_num_frames_per_traj: 8
+action_supervision_type: "tracks"
+
+num_positive_samples: 512
+num_negative_samples: 512
+
+augment_ctxt_image: false
+testing_mask_ratio: null
