@@ -2,8 +2,8 @@ import torch
 import torch.nn as nn
 import tqdm
 
-from neural_jacobian_field.models.action_model import (
-    ActionModel,
+from neural_jacobian_field.models.model import (
+    Model,
     ActionModelInput,
     SceneRepresentation,
 )
@@ -13,7 +13,7 @@ from . import CameraContext
 
 
 def optimize_actions(
-    model: ActionModel,
+    model: Model,
     camera_context: CameraContext,
     ctxt_image: Float[Tensor, "C H W"],
     z_near: Float[Tensor, "()"],
@@ -57,7 +57,6 @@ def optimize_actions(
     }
 
     with torch.no_grad():
-
         jacobian_info: SceneRepresentation = model.encode_image(
             origins[:, index_selector_t0, :],
             directions[:, index_selector_t0, :],

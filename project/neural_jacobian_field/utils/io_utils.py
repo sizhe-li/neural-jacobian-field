@@ -111,9 +111,56 @@ def load_tracking_data(tracking_data_filename):
     return tracking_data
 
 
-def save_svg(fig, path: Path) -> None:
-    import svg
+def load_tapir_tracks(
+    trgt_img_filename: str,
+    traj_idx: int,
+    curr_frame_idx: int,
+    next_frame_idx: int,
+    num_negative: int = 512,
+    num_positive: int = 512,
+):
+    ### load positive mask
+    pos_hand_mask = (
+        str(trgt_img_filename).replace("rgb", "mask").replace(".png", ".npy")
+    )
+    pos_hand_mask = torch.from_numpy(np.load(pos_hand_mask)).float()
 
+    ### get negative mask
+    neg_hand_mask = (1 - pos_hand_mask).float()
+    negative_yx = neg_hand_mask.nonzero()
+
+    negative_yx = negative_yx[torch.randperm(len(negative_yx))[:num_negative]]
+
+    point_track_filename = trgt_img_filename.replace("rgb", "tapir").replace(
+        f"{traj_idx:05d}_{curr_frame_idx:05d}.png", f"{traj_idx:05d}_001.npz"
+    )
+
+    try:
+        tapir_data = np.load(point_track_filename)
+    except:
+        return False
+
+    ### load point tracks
+    ### (x, y) order
+    point_track_data = torch.from_numpy(tapir_data["tracks"]).float()
+    pixel_visible_mask = torch.from_numpy(tapir_data["visibles"]).float()
+
+    rand_indices = torch.randperm(len(point_track_data))
+    point_track_data = point_track_data[rand_indices][:num_positive]
+    pixel_visible_mask = pixel_visible_mask[rand_indices][:num_positive]
+
+    # converting to long is super important!!!
+    point_track_data[:, :, 0] = point_track_data[:, :, 0].clip(0, 639).long()
+    point_track_data[:, :, 1] = point_track_data[:, :, 1].clip(0, 479).long()
+
+    return {
+        "point_track_data": point_track_data,
+        "pixel_visible_mask": pixel_visible_mask,
+        "negative_yx": negative_yx,
+    }
+
+
+def save_svg(fig, path: Path) -> None:
     path.parent.mkdir(exist_ok=True, parents=True)
     with path.open("w") as f:
         # This hack makes embedded images work.
@@ -134,6 +181,7 @@ def save_svg(fig, path: Path) -> None:
 
 
 def combine_roots(cfg, dataparser_outputs, downscale_factor):
+    from ..data.dataset.config_parser import DNeRFDataParserConfig
 
     print("Combining data with other roots", cfg.other_roots)
 

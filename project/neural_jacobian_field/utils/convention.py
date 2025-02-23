@@ -52,7 +52,7 @@ def resize_optical_flow(
     return flow
 
 
-def extract_traj_and_frame_idx(image_filename: str):
+def get_traj_and_frame_idx(image_filename: str):
     keynames = image_filename.split("/")
     traj_idx, frame_idx = keynames[-1].split("_")
 

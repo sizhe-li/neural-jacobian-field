@@ -42,7 +42,9 @@ MAX_AUTO_RESOLUTION = 1600
 
 @dataclass
 class DNeRFDataParserOutputs(DataparserOutputs):
-    sample_to_camera_idx: Optional[Int[Tensor, "num_samples"]] = None
+    sample_to_camera_idx: Int[Tensor, "num_samples"] = torch.tensor(
+        [], dtype=torch.long
+    )
 
 
 @dataclass
