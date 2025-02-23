@@ -12,7 +12,7 @@ from neural_jacobian_field.rendering.geometry import (
     transform_world2cam,
 )
 
-from neural_jacobian_field.models import ActionModel, ActionWrapper
+from neural_jacobian_field.models import Model, ModelWrapper
 from neural_jacobian_field.data.dataset.config_parser import (
     DNeRFDataParser,
     DNeRFDataParserConfig,
@@ -129,11 +129,11 @@ def load_model(
     model_cfg: DictConfig,
     model_ckpt: Path,
     device: torch.device = torch.device("cuda:0"),
-) -> ActionModel:
-    model_wrapper = ActionWrapper.load_from_checkpoint(
+) -> Model:
+    model_wrapper = ModelWrapper.load_from_checkpoint(
         str(model_ckpt),
         cfg=model_cfg,
-        model=ActionModel(model_cfg),
+        model=Model(model_cfg),
         strict=False,
     )
 

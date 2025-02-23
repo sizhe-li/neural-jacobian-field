@@ -1,8 +1,26 @@
+from dataclasses import dataclass
+from typing import Literal
+
 import torch
 import torch.autograd.profiler as profiler
 from jaxtyping import Float
 from omegaconf import DictConfig
 from torch import Tensor, nn
+
+
+@dataclass
+class MlpCfg:
+    n_blocks: int
+    d_hidden: int
+    combine_layer: int
+    combine_type: Literal["mean"]
+    beta: float
+
+
+@dataclass
+class MLPOutput:
+    output: Float[Tensor, "camera sample d_out"]
+    features: Float[Tensor, "camera sample d_out"] | None
 
 
 # Resnet Blocks
@@ -62,10 +80,10 @@ class ResnetBlockFC(nn.Module):
 
 
 class ResnetFC(nn.Module):
-    resnet_cfg: DictConfig
+    resnet_cfg: MlpCfg
     d_latent: int
 
-    def __init__(self, resnet_cfg: DictConfig, d_in: int, d_latent: int, d_out: int):
+    def __init__(self, resnet_cfg: MlpCfg, d_in: int, d_latent: int, d_out: int):
         """
         :param d_in input size
         :param d_out output size
@@ -111,25 +129,26 @@ class ResnetFC(nn.Module):
 
     def forward(
         self,
-        z: Float[Tensor, "camera view sample d_latent"],  # features
-        x: Float[Tensor, "camera view sample d_in"],  # encoded rays
-        compute_action_features: bool = False,
-    ) -> Float[Tensor, "camera sample d_out"]:
+        z: Float[Tensor, "*batch d_latent"],  # features
+        x: Float[Tensor, "*batch d_in"],  # encoded rays
+        compute_features: bool = False,
+    ) -> MLPOutput:
         x = self.lin_in(x)
 
-        action_features = [] if compute_action_features else None
-        for blkid in range(self.resnet_cfg.n_blocks):
-            if self.d_latent > 0 and blkid < self.resnet_cfg.combine_layer:
-                tz = self.lin_z[blkid](z)
+        features = [] if compute_features else None
+        for block_id in range(self.resnet_cfg.n_blocks):
+            if self.d_latent > 0 and block_id < self.resnet_cfg.combine_layer:
+                tz = self.lin_z[block_id](z)
                 x = x + tz
 
-            x = self.blocks[blkid](x)
+            x = self.blocks[block_id](x)
 
-            if compute_action_features:
-                action_features.append(x)
+            if compute_features:
+                features.append(x)
 
         output = self.lin_out(self.activation(x))
-        if compute_action_features:
-            return output, torch.cat(action_features, dim=-1)
 
-        return output
+        if compute_features:
+            features = torch.cat(features, dim=-1)
+
+        return MLPOutput(output=output, features=features)

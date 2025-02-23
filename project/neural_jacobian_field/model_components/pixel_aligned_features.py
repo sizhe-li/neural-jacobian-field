@@ -8,7 +8,7 @@ from neural_jacobian_field.rendering.geometry import (
 )
 
 
-def pixel_aligned_features(
+def get_pixel_aligned_features(
     coords_3d_world, cam2world, intrinsics, img_features, interp="bilinear"
 ):
     # Args:

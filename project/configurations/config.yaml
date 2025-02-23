@@ -1,53 +1,41 @@
 defaults:
-  - dataset: toy_arm
-  - model: toy_arm
-
-# List of tasks including train, test or both.
-tasks: [train]
+  - dataset: dataset_allegro
+  - model: model_allegro
 
 wandb:
+  name: allegro
   entity: scene-representation-group
   project: self-model
   mode: online
-
-  # To load a checkpoint, set the run ID here.
-  resume: null
+  group: null
+  tags: null
 
 dataset:
   overfit_to_scene: null
 
-num_context_views: 1
-rays_per_batch: 1024
-
 training:
   data:
-    batch_size: 4
-    num_workers: 8
+    batch_size: 7
+    num_workers: 16
+    rays_per_batch: 1024
   optim:
     lr: 1e-4
     warm_up_steps: 10000
-    accumulate_grad_batches: 1
-  checkpointing:
-    every_n_train_steps: 5000
 
-testing:
-  data:
-    batch_size: 1
-    num_workers: 4
-
-  # Total number of pixels (width * height). Omit for original size.
-  resolution: 16384
+  val_check_interval: 1000
+  max_steps: 50000000  # 50 million steps
 
 validation:
-  interval: 1000
   data:
     batch_size: 1
     num_workers: 4
+    rays_per_batch: null
   video:
-    # As a fraction of regular validation frequency.
     frequency: 0.25
     num_frames: 30
     frame_rate: 30
 
-  # Total number of pixels (width * height). Omit for original size.
-  resolution: 16384
+checkpoint:
+  every_n_train_steps: 5000
+  load: null
+
