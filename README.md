@@ -4,7 +4,9 @@ This is the code for **Unifying 3D Representation and Control of Diverse Robots 
 
 Check out the [project website here](https://sizhe-li.github.io/publication/neural_jacobian_field/).
 
-![plot](./assets/teaser.png)
+
+https://github.com/user-attachments/assets/94018ef8-2a3f-44e0-b196-143d7f98b867
+
 
 ## News
 <!-- - [12/03/2024] We will release a cleaner, type-checked implementation in two weeks. Stay tuned! -->
