@@ -1,0 +1,3 @@
+[submodule "mujoco-phys-sim"]
+	path = mujoco-phys-sim
+	url = https://github.com/sizhe-li/mujoco-phys-sim.git
