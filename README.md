@@ -6,8 +6,10 @@
 [TL;DR] Neural Jacobian Fields are a general-purpose representation of robotic systems that can be learned from perception.
 
 <!-- insert some visualization -->
-![jacobian_fields_teaser-ezgif com-resize](https://github.com/user-attachments/assets/25d0a074-3c4a-4e9a-88cb-a43d769569f0)
+https://github.com/user-attachments/assets/62786f4c-94e9-48b0-a924-d50d92aaa0a9
 
+![PusherExample](https://github.com/user-attachments/assets/afffb1a9-e10e-4515-9393-be53c2e70f14)
+![FingerExample](https://github.com/user-attachments/assets/3cd3014c-a755-47e8-9375-f84e2a4bc542)
 
 # Quickstart
 We provide python implementations of
@@ -71,8 +73,6 @@ python3 -m pip install -e .
 - (Upcoming) `notebooks/tutorial/3_controlling_robots_with_2D_jacobian_fields.ipynb`
 - (Upcoming) `notebooks/tutorial/4_jacobian_fields_in_3D.ipynb`
 
-![PusherExample](https://github.com/user-attachments/assets/afffb1a9-e10e-4515-9393-be53c2e70f14)
-![FingerExample](https://github.com/user-attachments/assets/3cd3014c-a755-47e8-9375-f84e2a4bc542)
 
 ## B. Reproducing real-world experiments 
 
