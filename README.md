@@ -74,6 +74,11 @@ python3 -m pip install -e .
 
 ## B. Reproducing real-world experiments 
 
+### Demos that are directly runnable (no need to train anything!)
+We show how to visualize the learned Jacobian fields and solve for robot commands via inverse dynamics.
+- **1. Visualize Jacobian Fields:** `notebooks/1_visualize_jacobian_fields.ipynb`
+- **2. Inverse Dynamics Optimization:** `notebooks/2_inverse_dynamics_optimization.ipynb`
+- **3. Deployment on real-robot** Upcoming by mid-April 2025!
 
 ### Dataset requirements
 
@@ -83,7 +88,7 @@ Our Jacobian Fields were trained with our multi-view robot dataset [[paper]](htt
 
 ### Pre-trained checkpoints
 
-You can find pre-trained checkpoints [here](https://drive.google.com/drive/folders/1fq0nngkeRWhCJ_CAyzQopYda20Zu-Zu8?usp=sharing). Directory `model_checkpoints` needs to be placed in the root directory for inference examples (.ipynb files) to run correctly.
+You can find pre-trained checkpoints for **Allegro Hand** and **Toy Arm** inside `notebooks/inference_demo_data/pretrained_ckpts`.
 
 ### Training
 
@@ -95,12 +100,6 @@ python3 -m neural_jacobian_field.train dataset.mode=perception
 
 - To reduce memory usage, you can change the batch size as follows: `training.data.batch_size=1`
 - Our code supports multi-GPU training. The above batch size is the per-GPU batch size.
-
-### Deployment 
-We show how to visualize the learned Jacobian fields and solve for robot commands via inverse dynamics.
-- **1. Visualize Jacobian Fields:** `notebooks/1_visualize_jacobian_fields.ipynb`
-- **2. Inverse Dynamics Optimization:** `notebooks/2_inverse_dynamics_optimization.ipynb`
-- **3. Deployment on real-robot** Upcoming by mid-April 2025!
 
 ### Camera Conventions
 
