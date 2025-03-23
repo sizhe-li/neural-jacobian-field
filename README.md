@@ -64,7 +64,6 @@ python3 -m pip install -e .
 # How to run
 
 ## A. Reproducing simulated experiments (30 mins)
-![PusherExample](https://github.com/user-attachments/assets/afffb1a9-e10e-4515-9393-be53c2e70f14)
 ![FingerExample](https://github.com/user-attachments/assets/3cd3014c-a755-47e8-9375-f84e2a4bc542)
 
 **1. Warm-up: Training 2D Jacobian Fields**: please follow the following notebooks
