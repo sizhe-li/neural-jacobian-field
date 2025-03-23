@@ -71,6 +71,8 @@ python3 -m pip install -e .
 - (Upcoming) `notebooks/tutorial/3_controlling_robots_with_2D_jacobian_fields.ipynb`
 - (Upcoming) `notebooks/tutorial/4_jacobian_fields_in_3D.ipynb`
 
+![PusherExample](https://github.com/user-attachments/assets/afffb1a9-e10e-4515-9393-be53c2e70f14)
+![FingerExample](https://github.com/user-attachments/assets/3cd3014c-a755-47e8-9375-f84e2a4bc542)
 
 ## B. Reproducing real-world experiments 
 
