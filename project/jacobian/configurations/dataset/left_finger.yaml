@@ -1,0 +1,6 @@
+name: "planar_hand"
+root: "/home/scene-rep-robot/scratch/neural-jacobian-field-public/data/left_finger"
+new_H: 252
+new_W: 252
+
+

@@ -1,0 +1,10 @@
+name: "planar_hand"
+
+optim:
+  lr: 1e-4
+  warm_up_steps: 10000
+
+model:
+  name: transformer
+  command_dim: 2
+  spatial_dim: 2

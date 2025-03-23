@@ -1,69 +1,115 @@
-# Neural Jacobian Field
+# Neural Jacobian Fields
+*Sizhe Lester Li, Annan Zhang, Boyuan Chen, Hanna Matusik, Chao Liu, Daniela Rus, and Vincent Sitzmann*
 
-This is the code for **Unifying 3D Representation and Control of Diverse Robots with a Single Camera** by Sizhe Lester Li, Annan Zhang, Boyuan Chen, Hanna Matusik, Chao Liu, Daniela Rus, and Vincent Sitzmann
+[[Project Website]](https://sizhe-li.github.io/publication/neural_jacobian_field/)[[Paper]](https://arxiv.org/abs/2407.08722)[[Video]](https://youtu.be/dFZ1RvJMN7A)
 
-Check out the [project website here](https://sizhe-li.github.io/publication/neural_jacobian_field/).
+[TL;DR] Neural Jacobian Fields are a general-purpose representation of robotic systems that can be learned from perception.
 
+<!-- insert some visualization -->
 ![plot](./assets/teaser.png)
 
-## News
-- [12/27/2024] This branch is temporary; please only refer to `./project` for the purpose of a clean implementation of our framework. The notebooks and model checkpoints are out-of-date and will be updated soon!
 
-## Installation
+# Quickstart
+We provide python implementations of
+- 3D Jacobian Fields: `project/neural_jacobian_field`
+- 2D Jacobian Fields: `project/jacobian`
+- A customized mujoco simulator [[github repo]](https://github.com/sizhe-li/mujoco-phys-sim.git) for simulated experiments in 2D and 3D: `mujoco-phys-sim`
+
+
+## Installation 
+
+### Prerequisites
+You must have an NVIDIA video card with CUDA installed on the system. This library has been tested with version 11.8 of CUDA. 
+
+### Create environment
+```bash
+conda create --name neural-jacobian-field python=3.10.8
+conda activate neural-jacobian-field
+```
+
+### 1. Install dependencies 
+For CUDA 11.8:
+```bash
+pip install torch==2.1.2+cu118 torchvision==0.16.2+cu118 --extra-index-url https://download.pytorch.org/whl/cu118
+conda install -c "nvidia/label/cuda-11.8.0" cuda-toolkit
+pip install ninja git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch
+pip install git+https://github.com/sizhe-li/nerfstudio.git
+```
+
+
+### 2. Install customized mujoco wrapper for simulated experiments [[github repo]](https://github.com/sizhe-li/mujoco-phys-sim.git)
 
 ```bash
-conda create --name neural-jacobian-field python=3.9.18
-conda activate neural-jacobian-field
+git submodule update --init --recursive
+```
 
+Please check out the installation guide inside `mujoco-phys-sim` repository. We provide a brief installation guide here.
+
+```bash
+cd mujoco-phys-sim
+pip install -r requirements.txt
+pip install -e .
+```
+
+
+### 3. Install Jacobian Fields
+
+<!-- (TODO @ Lester) update the description -->
+```bash
 cd project
-bash install.sh
+pip install -r requirements_new.txt
 python3 -m pip install -e .
 ```
 
-## Acquiring Datasets
+# How to run
 
-Neural Jacobian Fields was trained with our own multi-view robot dataset. Our dataset includes a pneumatic robot hand (mounted on a robot arm), the Allegro robot hand, the Handed Shearing Auxetics platform, and the Poppy robot arm.
+## A. Reproducing simulated experiments (30 mins)
 
-We plan to release all our robot data to encourage future research endeavors. The Poppy robot arm data is included in the initial code release.
+**1. Warm-up: Training 2D Jacobian Fields**: please follow the following notebooks
+- `notebooks/tutorial/1_training_pusher_jacobian_in_2D.ipynb`
+- `notebooks/tutorial/2_training_finger_jacobian_in_2D.ipynb`
+- (Upcoming) `notebooks/tutorial/3_controlling_robots_with_2D_jacobian_fields.ipynb`
+- (Upcoming) `notebooks/tutorial/4_jacobian_fields_in_3D.ipynb`
 
-**We are actively working on uploading our dataset to the web. Updates on this coming very soon!**
 
-## Acquiring Pre-trained Checkpoints
+## B. Reproducing real-world experiments 
+
+
+### Dataset requirements
+
+Our Jacobian Fields were trained with our multi-view robot dataset [[paper]](https://arxiv.org/abs/2407.08722). Our dataset includes a pneumatic robot hand (mounted on a robot arm), the Allegro robot hand, the Handed Shearing Auxetics platform, and the Poppy robot arm. We will release all our robot data to encourage future research endeavors. 
+
+**We are actively working on uploading our dataset to the web. Updates on this coming very soon!** Please contact sizheli@mit.edu if you need it urgently.
+
+### Pre-trained checkpoints
 
 You can find pre-trained checkpoints [here](https://drive.google.com/drive/folders/1fq0nngkeRWhCJ_CAyzQopYda20Zu-Zu8?usp=sharing). Directory `model_checkpoints` needs to be placed in the root directory for inference examples (.ipynb files) to run correctly.
-
-## Running the Code
 
 ### Training
 
 The main entry point is `project/neural_jacobian_field/train.py`. Call it via:
 
 ```bash
-python3 -m neural_jacobian_field.train \
-training.data.batch_size=6 training.data.num_workers=16 dataset=toy_arm \
-model=toy_arm model.train_flow=false model.train_encoder=true
+python3 -m neural_jacobian_field.train dataset.mode=perception 
 ```
 
-To reduce memory usage, you can change the batch size as follows:
+- To reduce memory usage, you can change the batch size as follows: `training.data.batch_size=1`
+- Our code supports multi-GPU training. The above batch size is the per-GPU batch size.
 
-```bash
-python3 -m neural_jacobian_field.train training.data.batch_size=1 "...all other flags"
-```
+### Deployment 
+We show how to visualize the learned Jacobian fields and solve for robot commands via inverse dynamics.
+- **1. Visualize Jacobian Fields:** `notebooks/1_visualize_jacobian_fields.ipynb`
+- **2. Inverse Dynamics Optimization:** `notebooks/2_inverse_dynamics_optimization.ipynb`
+- **3. Deployment on real-robot** Upcoming by mid-April 2025!
 
-Our code supports multi-GPU training. The above batch size is the per-GPU batch size.
-
-### Evaluation
-
-- [Visualize Jacobian Fields] `notebooks/1_visualize_jacobian_fields.ipynb`
-- [Inverse Dynamics Optimization] `notebooks/2_inverse_dynamics_optimization.ipynb`
-- [Robot Experiment] `Coming soon!`
-
-## Camera Conventions
+### Camera Conventions
 
 Our extrinsics are OpenCV-style camera-to-world matrices. This means that +Z is the camera look vector, +X is the camera right vector, and -Y is the camera up vector. Our intrinsics are normalized, meaning that the first row is divided by image width, and the second row is divided by image height.
 
 
 ## BibTeX
+
+Please consider citing our work if you find that our work is helpful for your research endeavors :D
 
 ```
 @misc{li2024unifying3drepresentationcontrol,

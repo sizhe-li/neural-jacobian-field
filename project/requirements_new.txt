@@ -1,0 +1,11 @@
+einops
+wandb
+black
+jaxtyping
+colorama
+natsort
+pytorch_lightning
+lightning
+beartype
+wandb_osh
+torchtyping

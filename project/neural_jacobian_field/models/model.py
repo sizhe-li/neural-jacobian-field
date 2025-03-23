@@ -19,6 +19,8 @@ from .decoder import (
     get_action_decoder,
 )
 from .decoder.action_decoder import PixelEncoding
+from .decoder.action_decoder_jacobian import DensityHeadOutput
+
 from .encoder import EncoderCfg, get_encoder
 from ..rendering.geometry import project_world_coords_to_camera
 from ..rendering.ray_samplers import (
@@ -27,6 +29,7 @@ from ..rendering.ray_samplers import (
     RaySamples,
     UniformSampler,
 )
+from ..model_components.pixel_aligned_features import get_pixel_aligned_features
 
 
 @dataclass
@@ -392,6 +395,66 @@ class Model(nn.Module):
 
         return model_output
 
+    def compute_pixel_encoding(
+        self,
+        camera_input: CameraInput,
+        rendering_input: RenderingInput,
+        robot_input: RobotInput,
+    ) -> PixelEncoding:
+        """Function used by inference algorithms for encoding an input image"""
+
+        features = self.encoder.forward(camera_input.input_image)
+        pixel_encoding = PixelEncoding(
+            features=features,
+            extrinsics=camera_input.ctxt_extrinsics,
+            intrinsics=camera_input.ctxt_intrinsics,
+            action=robot_input.robot_action,
+        )
+
+        return pixel_encoding
+
+    def compute_density(
+        self,
+        world_space_xyz: Float[Tensor, "batch ray sample 3"],
+        pixel_encoding: PixelEncoding,
+    ) -> Tuple[DensityHeadOutput, dict]:
+        """Function used by inference algorithms for encoding an input image"""
+
+        pixel_aligned_features, world_space_xyz, _ = get_pixel_aligned_features(
+            world_space_xyz,
+            pixel_encoding.extrinsics,
+            pixel_encoding.intrinsics,
+            pixel_encoding.features,
+        )
+        xyz_features = self.decoder.positional_encoding(world_space_xyz.contiguous())
+
+        density_features = self.decoder.density_head.forward(
+            pixel_aligned_features, xyz_features
+        ).output
+
+        density_features, density_before_activation = torch.split(
+            density_features,
+            [self.decoder.cfg.geometry_feature_dim, 1],
+            dim=-1,
+        )
+
+        density = self.decoder.density_activation(density_before_activation)
+
+        density_head_output = DensityHeadOutput(
+            density=density,
+            density_features=density_features,
+            xyz_features=xyz_features,
+            pixel_aligned_features=pixel_aligned_features,
+        )
+
+        extras = {}
+        if "jacobian" in self.cfg.action_decoder.name:
+            jacobian_head_output = self.decoder.compute_jacobian(density_head_output)
+
+            extras["jacobian_head_output"] = jacobian_head_output
+
+        return density_head_output, extras
+
     def encode_image(
         self,
         camera_input: CameraInput,
@@ -439,7 +502,7 @@ class Model(nn.Module):
     ) -> Float[Tensor, "batch ray 2"]:
         """Function used by inference algorithms for optimizing actions"""
 
-        assert self.cfg.action_decoder.name == "jacobian_mlp"
+        assert "jacobian" in self.cfg.action_decoder.name
 
         scene_flow = einsum(
             rearrange(
@@ -461,6 +524,7 @@ class Model(nn.Module):
 
         return optical_flow
 
+    @torch.no_grad()
     def patch_render(
         self,
         camera_input: CameraInput,

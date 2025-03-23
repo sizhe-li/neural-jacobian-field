@@ -1,0 +1,1 @@
+from .common import get_typed_root_config

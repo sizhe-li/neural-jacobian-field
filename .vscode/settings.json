@@ -40,8 +40,10 @@
     },
     "python.autoComplete.extraPaths": [
         "./project",
+        "./mujoco-phys-sim",
     ],
     "python.analysis.extraPaths": [
-        "./project"
+        "./project",
+        "./mujoco-phys-sim",
     ]
 }
