@@ -1,15 +1,51 @@
 import torch
-import torch
 import torch.nn as nn
 import torch.nn.functional as F
+
+from typing import Tuple
 from einops import rearrange
-from torchtyping import TensorType
+from torch import Tensor
 from torchvision.models.optical_flow import Raft_Large_Weights, raft_large
+from jaxtyping import Float
+from torchvision.utils import flow_to_image
 
 
-# from typeguard import typechecked
+def resize_batched_frames(
+    color_data: Float[Tensor, "N C H W"],
+    long_dim: int = 768,
+    inter_mode="bilinear",
+) -> Tuple[Float[Tensor, "N C H W"], Tuple[int, int]]:
+    orig_H, orig_W = color_data.shape[-2:]
 
-# patch_typeguard()
+    if orig_H > orig_W:
+        new_H, new_W = long_dim, int(long_dim / orig_H * orig_W)
+    else:
+        new_H, new_W = int(long_dim / orig_W * orig_H), long_dim
+
+    color_data = torch.nn.functional.interpolate(
+        color_data, (new_H, new_W), mode=inter_mode
+    )
+
+    return color_data, (orig_H, orig_W)
+
+
+def resize_batched_flow(
+    flow: Float[Tensor, "N 2 H W"],
+    new_H: int,
+    new_W: int,
+    inter_mode="bilinear",
+) -> Float[Tensor, "N 2 H W"]:
+    curr_H, curr_W = flow.shape[-2:]
+
+    # for interpretability and avoiding dimension mismatch
+    W_dim = 0
+    H_dim = 1
+
+    flow[:, :, W_dim] *= new_W / curr_W
+    flow[:, :, H_dim] *= new_H / curr_H
+
+    flow = torch.nn.functional.interpolate(flow, (new_H, new_W), mode=inter_mode)
+    return flow
 
 
 class InputPadder:
@@ -45,6 +81,7 @@ class RaftWrapper(nn.Module):
         self.model = raft_large(weights=weights, progress=False)
         self._transforms = weights.transforms()
 
+        self.register_buffer("_motion_thresh", torch.tensor(0.5, dtype=torch.float32))
         self._freeze_params()
 
     def _freeze_params(self):
@@ -53,6 +90,7 @@ class RaftWrapper(nn.Module):
             param.requires_grad = False
 
     def _forward_flow(self, img1_batch, img2_batch):
+
         list_of_flows = self.model(
             *self._transforms(img1_batch, img2_batch),
             num_flow_updates=20,
@@ -64,7 +102,7 @@ class RaftWrapper(nn.Module):
     # @typechecked
     def forward_flow(
         self,
-        images: TensorType["b", "t", 3, "h", "w", torch.float32],
+        images: Float[Tensor, "batch time channel height width"],
         chunk: int = 50,
     ):
         T = images.shape[1]
@@ -86,3 +124,14 @@ class RaftWrapper(nn.Module):
 
     def forward(self, img1_batch, img2_batch):
         return self._forward_flow(img1_batch, img2_batch)
+
+    def convert_flow_to_video(
+        self, flow: Float[Tensor, "N 2 H W"]
+    ) -> Float[Tensor, "N C H W"]:
+        H, W = flow.shape[-2:]
+        flow_vid = flow_to_image(flow)
+        flow_vid = torch.nn.functional.interpolate(flow_vid, (H, W))
+        flow_vid = rearrange(flow_vid, "t c h w -> t h w c")
+        flow_vid = flow_vid.cpu().numpy()
+
+        return flow_vid

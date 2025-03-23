@@ -1,0 +1,10 @@
+name: "pusher"
+
+optim:
+  lr: 1e-4
+  warm_up_steps: 10000
+
+model:
+  name: unet
+  command_dim: 2
+  spatial_dim: 2

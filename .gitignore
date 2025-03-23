@@ -157,3 +157,6 @@ artifacts/
 *.pyc
 
 model_checkpoints/
+outputs/
+data/
+checkpoints/

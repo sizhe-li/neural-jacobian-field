@@ -1,0 +1,23 @@
+defaults:
+  - dataset: pusher_only
+  - wrapper: pusher_only
+
+wandb:
+  project: self-model
+  entity: scene-representation-group
+  mode: online
+  name: jacobian
+  group: null
+  tags: null
+
+checkpoint:
+  every_n_train_steps: 500
+  load: ""
+
+training:
+  data:
+    batch_size: 12
+    num_workers: 12
+
+  val_check_interval: 500
+  max_steps: 2000000

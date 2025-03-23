@@ -1,5 +1,0 @@
-name: "resnet"
-use_first_pool: true
-num_layers: 4
-norm_type: batch
-upsample_interp: bilinear
