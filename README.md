@@ -8,7 +8,10 @@
 <!-- insert some visualization -->
 https://github.com/user-attachments/assets/62786f4c-94e9-48b0-a924-d50d92aaa0a9
 
+# Announcements
+- [03/23/25] Major updates: we added tutorials on training 2D Jacobian Fields in simulations, and the codes are now highly modularized and clean.
 
+  
 # Quickstart
 We provide python implementations of
 - 3D Jacobian Fields: `project/neural_jacobian_field`
