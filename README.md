@@ -49,7 +49,7 @@ git submodule update --init --recursive
 Please check out the installation guide inside `mujoco-phys-sim` repository. We provide a brief installation guide here.
 
 ```bash
-cd mujoco-phys-sim
+cd mujoco-phys-sim/phys_sim
 pip install -r requirements.txt
 pip install -e .
 ```
