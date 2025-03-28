@@ -84,7 +84,10 @@ def load_gzip_file(file_name):
     return traj
 
 
-def save_gzip_file(data, file_name):
+def save_gzip_file(data, file_name: Path | str):
+    if isinstance(file_name, Path):
+        file_name = str(file_name)
+
     assert file_name[-3:] == "pkl"
     with gzip.open(file_name, "wb") as f:
         pickle.dump(data, f, protocol=4)
