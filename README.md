@@ -68,6 +68,16 @@ python3 -m pip install -e .
 
 # How to run
 
+### Download Pre-trained checkpoints
+
+In order to run the four tutorials, you need to download pretrained checkpoints [here](https://drive.google.com/drive/folders/1fq0nngkeRWhCJ_CAyzQopYda20Zu-Zu8?usp=drive_link).
+
+Replace the following with your downloaded directories
+
+- `notebooks/inference_demo_data/real_world_pretrained_ckpts` 
+- `notebooks/tutorial/tutorial_pretrained_ckpts` 
+
+
 ## A. Reproducing simulated experiments (30 mins)
 ![FingerExample](https://github.com/user-attachments/assets/3cd3014c-a755-47e8-9375-f84e2a4bc542)
 
@@ -92,9 +102,6 @@ Our Jacobian Fields were trained with our multi-view robot dataset [[paper]](htt
 
 **We are actively working on uploading our dataset to the web. Updates on this coming very soon!** Please contact sizheli@mit.edu if you need it urgently.
 
-### Pre-trained checkpoints
-
-You can find pre-trained checkpoints for **Allegro Hand** and **Toy Arm** inside `notebooks/inference_demo_data/pretrained_ckpts`.
 
 ### Training
 
