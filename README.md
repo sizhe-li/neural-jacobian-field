@@ -11,6 +11,7 @@
 https://github.com/user-attachments/assets/62786f4c-94e9-48b0-a924-d50d92aaa0a9
 
 # Announcements
+- **[04/20/25] Dataset is online!** Our dataset is available on HuggingFace! [Link](https://huggingface.co/datasets/sizhe-lester-li/neural-jacobian-field).
 - **[03/23/25] Major updates**: we added tutorials on training 2D Jacobian Fields in simulations.
 
   
@@ -98,10 +99,7 @@ We show how to visualize the learned Jacobian fields and solve for robot command
 
 ### Dataset requirements
 
-Our Jacobian Fields were trained with our multi-view robot dataset [[paper]](https://arxiv.org/abs/2407.08722). Our dataset includes a pneumatic robot hand (mounted on a robot arm), the Allegro robot hand, the Handed Shearing Auxetics platform, and the Poppy robot arm. We will release all our robot data to encourage future research endeavors. 
-
-**We are actively working on uploading our dataset to the web. Updates on this coming very soon!** Please contact sizheli@mit.edu if you need it urgently.
-
+Our dataset is available on HuggingFace! [Link](https://huggingface.co/datasets/sizhe-lester-li/neural-jacobian-field). Our Jacobian Fields were trained with our multi-view robot dataset [[paper]](https://arxiv.org/abs/2407.08722). Our dataset includes a pneumatic robot hand (mounted on a robot arm), the Allegro robot hand, the Handed Shearing Auxetics platform, and the Poppy robot arm.
 
 ### Training
 
