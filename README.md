@@ -11,7 +11,7 @@
 https://github.com/user-attachments/assets/62786f4c-94e9-48b0-a924-d50d92aaa0a9
 
 # Announcements
-- **[06/25/2025]** Our paper is now published on *Nature* (https://www.nature.com/articles/s41586-025-09170-0)
+- **[06/25/2025]** Our paper is now published on [*Nature*](https://www.nature.com/articles/s41586-025-09170-0)
 - **[04/20/2025] Dataset is online!** Our dataset is available on HuggingFace! [Link](https://huggingface.co/datasets/sizhe-lester-li/neural-jacobian-field).
 - **[03/23/2025] Major updates**: we added tutorials on training 2D Jacobian Fields in simulations.
 
