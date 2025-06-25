@@ -3,7 +3,7 @@
 
 [[Tutorial]](https://sizhe-li.github.io/blog/2025/jacobian-fields-tutorial/) (**Highly recommended**)
 
-[[Project Website]](https://sizhe-li.github.io/publication/neural_jacobian_field/)[[Paper]](https://arxiv.org/abs/2407.08722)[[Video]](https://youtu.be/dFZ1RvJMN7A)
+[[Project Website]](https://sizhe-li.github.io/publication/neural_jacobian_field/)[[Paper]](https://www.nature.com/articles/s41586-025-09170-0)[[Video]](https://youtu.be/dFZ1RvJMN7A)
 
 [TL;DR] Neural Jacobian Fields are a general-purpose representation of robotic systems that can be learned from perception.
 
