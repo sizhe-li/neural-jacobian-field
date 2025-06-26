@@ -104,14 +104,17 @@ Our dataset is available on HuggingFace! [Link](https://huggingface.co/datasets/
 
 ### Training
 
-The main entry point is `project/neural_jacobian_field/train.py`. Call it via:
+The main entry point is `project/neural_jacobian_field/train.py`. There are two stages
 
+To train the perception module (PixelNeRF for density and radiance field predictions), run
 ```bash
 python3 -m neural_jacobian_field.train dataset.mode=perception 
 ```
 
-- To reduce memory usage, you can change the batch size as follows: `training.data.batch_size=1`
-- Our code supports multi-GPU training. The above batch size is the per-GPU batch size.
+To train the Jacobian Fields, replace the `checkpoint` flag with your wandb checkpoint and run the following command 
+```bash
+python3 -m neural_jacobian_field.train dataset.mode=action checkpoint.load=wandb://scene-representation-group/self-model/usoftylr:v5
+```
 
 ### Camera Conventions
 
