@@ -98,7 +98,7 @@ We show how to visualize the learned Jacobian fields and solve for robot command
 
 Our dataset is available on HuggingFace! [Link](https://huggingface.co/datasets/sizhe-lester-li/neural-jacobian-field). Our Jacobian Fields were trained with our multi-view robot dataset [[paper]](https://arxiv.org/abs/2407.08722). Our dataset includes a pneumatic robot hand (mounted on a robot arm), the Allegro robot hand, the Handed Shearing Auxetics platform, and the Poppy robot arm.
 
-### Training
+### Training PixelNeRF (density and radiance fields)
 
 The main entry point is `project/neural_jacobian_field/train.py`. There are two stages
 
@@ -106,6 +106,7 @@ To train the perception module (PixelNeRF for density and radiance field predict
 ```bash
 python3 -m neural_jacobian_field.train dataset.mode=perception 
 ```
+### Training Jacobian Fields
 
 To train the Jacobian Fields, replace the `checkpoint` flag with your wandb checkpoint and run the following command 
 ```bash
