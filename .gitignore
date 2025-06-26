@@ -158,5 +158,5 @@ artifacts/
 
 model_checkpoints/
 outputs/
-data/
 checkpoints/
+training_data/

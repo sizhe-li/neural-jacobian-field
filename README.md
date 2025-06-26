@@ -1,140 +1,137 @@
 # Neural Jacobian Fields
-*Sizhe Lester Li, Annan Zhang, Boyuan Chen, Hanna Matusik, Chao Liu, Daniela Rus, and Vincent Sitzmann*
 
-[[Tutorial]](https://sizhe-li.github.io/blog/2025/jacobian-fields-tutorial/) (**Highly recommended**)
+**Sizhe Lester Li, Annan Zhang, Boyuan Chen, Hanna Matusik, Chao Liu, Daniela Rus, Vincent Sitzmann**  
+📄 [**Paper** (Nature, 2025)](https://www.nature.com/articles/s41586-025-09170-0) | 🌐 [**Project Website**](https://sizhe-li.github.io/publication/neural_jacobian_field/) | 📖 [**Tutorial**](https://sizhe-li.github.io/blog/2025/jacobian-fields-tutorial/) | 🎥 [**Explainer**](https://youtu.be/dFZ1RvJMN7A)
 
-[[Project Website]](https://sizhe-li.github.io/publication/neural_jacobian_field/)[[Paper]](https://www.nature.com/articles/s41586-025-09170-0)[[Video]](https://youtu.be/dFZ1RvJMN7A)
+> **Neural Jacobian Fields** are a general-purpose representation of robotic systems that can be learned directly from perception.
 
-[TL;DR] Neural Jacobian Fields are a general-purpose representation of robotic systems that can be learned from perception.
+![Visualization](https://github.com/user-attachments/assets/62786f4c-94e9-48b0-a924-d50d92aaa0a9)
 
-<!-- insert some visualization -->
-https://github.com/user-attachments/assets/62786f4c-94e9-48b0-a924-d50d92aaa0a9
+---
 
-# Announcements
-- **[06/25/2025]** Our paper is now published on [*Nature*](https://www.nature.com/articles/s41586-025-09170-0)
-- **[04/20/2025] Dataset is online!** Our dataset is available on HuggingFace! [Link](https://huggingface.co/datasets/sizhe-lester-li/neural-jacobian-field).
-- **[03/23/2025] Major updates**: we added tutorials on training 2D Jacobian Fields in simulations.
+## 📢  Announcements
 
-  
-# Quickstart
-We provide python implementations of
-- 3D Jacobian Fields: `project/neural_jacobian_field`
-- 2D Jacobian Fields: `project/jacobian`
-- A customized mujoco simulator [[github repo]](https://github.com/sizhe-li/mujoco-phys-sim.git) for simulated experiments in 2D and 3D: `mujoco-phys-sim`
+- **[2025-06-25]** Our paper is now published in [**Nature**](https://www.nature.com/articles/s41586-025-09170-0)! 🎉  
+- **[2025-04-20]** Dataset now live on HuggingFace: [Link](https://huggingface.co/datasets/sizhe-lester-li/neural-jacobian-field)  
+- **[2025-03-23]** Major tutorial updates for training in 2D simulations
 
+---
 
-# Installation 
+## 🚀 Quickstart
 
-### Prerequisites
-You must have an NVIDIA video card with CUDA installed on the system. This library has been tested with version 11.8 of CUDA. 
+We provide the software implementations of:
+- 🧠 3D Jacobian Field: `project/neural_jacobian_field`  
+- ✋ 2D Jacobian Field: `project/jacobian`  
+- 🧪 Custom simulator: [`mujoco-phys-sim`](https://github.com/sizhe-li/mujoco-phys-sim.git)
 
-### Create environment
+### 📦 Installation
+
+#### 1. Create Conda Environment
+
 ```bash
 conda create --name neural-jacobian-field python=3.10.8
 conda activate neural-jacobian-field
 ```
 
-### 1. Install dependencies 
-For CUDA 11.8:
-```bash
+#### 2. Install Dependencies (CUDA 11.8)
+
+```
 pip install torch==2.1.2+cu118 torchvision==0.16.2+cu118 --extra-index-url https://download.pytorch.org/whl/cu118
 conda install -c "nvidia/label/cuda-11.8.0" cuda-toolkit
 pip install ninja git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch
 pip install git+https://github.com/sizhe-li/nerfstudio.git
 ```
 
-### 2. For simulated experiments, install our specialized simulator [[github repo]](https://github.com/sizhe-li/mujoco-phys-sim.git)
+#### 3. Install Simulator
 
-```bash
-git submodule update --init --recursive
 ```
-
-Please check out the installation guide inside `mujoco-phys-sim` repository. We provide a brief installation guide here.
-
-```bash
+git submodule update --init --recursive
 cd mujoco-phys-sim/phys_sim
 pip install -r requirements.txt
 pip install -e .
 ```
 
-### 3. Install Jacobian Fields
+#### 4. Install Jacobian Fields Codebase
 
-<!-- (TODO @ Lester) update the description -->
-```bash
+```
 cd project
 pip install -r requirements_new.txt
-python3 -m pip install -e .
+pip install -e .
 ```
 
-# How to run
+## ▶️ Running the Code
+### 📥 Download Pretrained Checkpoints
 
-### Download Pre-trained checkpoints
+Download from [Google Drive](https://drive.google.com/drive/folders/1fq0nngkeRWhCJ_CAyzQopYda20Zu-Zu8?usp=drive_link) and place them under:
 
-In order to run the four tutorials, you need to download pretrained checkpoints [here](https://drive.google.com/drive/folders/1fq0nngkeRWhCJ_CAyzQopYda20Zu-Zu8?usp=drive_link).
+```
+notebooks/inference_demo_data/real_world_pretrained_ckpts
+notebooks/tutorial/tutorial_pretrained_ckpts
+```
 
-Replace the following with your downloaded directories
-
-- `notebooks/inference_demo_data/real_world_pretrained_ckpts` 
-- `notebooks/tutorial/tutorial_pretrained_ckpts` 
-
-
-## A. Reproducing simulated experiments (30 mins)
+## 🧪 Simulated Experiments
 ![FingerExample](https://github.com/user-attachments/assets/3cd3014c-a755-47e8-9375-f84e2a4bc542)
 
-**1. Warm-up: Training 2D Jacobian Fields**: please follow the following notebooks
-- **Tutorial 1: Training Jacobian Fields in 2D Pusher Environment** `notebooks/tutorial/1_training_pusher_jacobian_in_2D.ipynb` 
-- **Tutorial 2: Training Jacobian Fields in 2D Finger Environment** `notebooks/tutorial/2_training_finger_jacobian_in_2D.ipynb`
-- **Tutorial 3: Controlling Robot with Jacobian Fields** `notebooks/tutorial/3_training_finger_jacobian_in_2D.ipynb` 
+Tutorial Notebooks (2D, ~30 mins each)
+
+- 🧩 [Tutorial 1 – 2D Pusher](https://github.com/sizhe-li/neural-jacobian-field/blob/6badf88418a4f39378dc4e708a8d0f1b3ba1b6eb/notebooks/tutorial/1_training_pusher_jacobian_in_2D.ipynb)
+- ✋ [Tutorial 2 – 2D Finger](https://github.com/sizhe-li/neural-jacobian-field/blob/6badf88418a4f39378dc4e708a8d0f1b3ba1b6eb/notebooks/tutorial/2_training_finger_jacobian_in_2D.ipynb)
+- 🤖 [Tutorial 3 – Finger Control](https://github.com/sizhe-li/neural-jacobian-field/blob/6badf88418a4f39378dc4e708a8d0f1b3ba1b6eb/notebooks/tutorial/3_control_demo_block_pushing.ipynb)
+
+## 🦾 Real-World Experiments
+
+## ✔️ Ready-to-Run Demos
+- 📊 Visualize Jacobian Fields
+- 🎯 Inverse Dynamics Optimization
+
+## 📦 Dataset (HuggingFace)
+
+### [Neural Jacobian Field Dataset]((https://huggingface.co/datasets/sizhe-lester-li/neural-jacobian-field))
+
+A multiview video-action dataset with camera poses that includes
+- Pneumatic robot hand (on robot arm)
+- Allegro robot hand
+- Handed Shearing Auxetics platform
+- Poppy robot arm
 
 
-## B. Reproducing real-world experiments 
+## 🏋️‍♀️ Training
 
-### Demos that are directly runnable (no need to train anything!)
-We show how to visualize the learned Jacobian fields and solve for robot commands via inverse dynamics.
-- **1. Visualize Jacobian Fields:** `notebooks/real_world/1_visualize_jacobian_fields.ipynb`
-- **2. Inverse Dynamics Optimization:** `notebooks/real_world/2_inverse_dynamics_optimization.ipynb`
+### A. Train Perception Module (PixelNeRF)
 
-### Dataset requirements
-
-Our dataset is available on HuggingFace! [Link](https://huggingface.co/datasets/sizhe-lester-li/neural-jacobian-field). Our Jacobian Fields were trained with our multi-view robot dataset [[paper]](https://arxiv.org/abs/2407.08722). Our dataset includes a pneumatic robot hand (mounted on a robot arm), the Allegro robot hand, the Handed Shearing Auxetics platform, and the Poppy robot arm.
-
-### Training PixelNeRF (density and radiance fields)
-
-The main entry point is `project/neural_jacobian_field/train.py`. There are two stages
-
-To train the perception module (PixelNeRF for density and radiance field predictions), run
-```bash
-python3 -m neural_jacobian_field.train dataset.mode=perception 
 ```
-### Training Jacobian Fields
+python3 -m neural_jacobian_field.train dataset.mode=perception
+```
+### B. Train Jacobian Field
 
-To train the Jacobian Fields, replace the `checkpoint` flag with your wandb checkpoint and run the following command 
-```bash
-python3 -m neural_jacobian_field.train dataset.mode=action checkpoint.load=wandb://scene-representation-group/self-model/usoftylr:v5
+Replace the `checkpoint` flag with what you have on wandb :)
+
+```
+python3 -m neural_jacobian_field.train dataset.mode=action checkpoint.load=wandb://entity/project/usoftylr:v5
 ```
 
-### Camera Conventions
+## 🎥 Camera Conventions
+- Extrinsics: OpenCV-style camera-to-world matrices
+(+Z = look vector, +X = right, –Y = up)
+- Intrinsics: Normalized (row 1 ÷ width, row 2 ÷ height)
 
-Our extrinsics are OpenCV-style camera-to-world matrices. This means that +Z is the camera look vector, +X is the camera right vector, and -Y is the camera up vector. Our intrinsics are normalized, meaning that the first row is divided by image width, and the second row is divided by image height.
 
-
-## BibTeX
-
-Please consider citing our work if you find that our work is helpful for your research endeavors :D
+## 📚 Citation
+If you find our work useful, please consider citing us:
 
 ```
 @misc{li2024unifying3drepresentationcontrol,
-      title={Unifying 3D Representation and Control of Diverse Robots with a Single Camera}, 
-      author={Sizhe Lester Li and Annan Zhang and Boyuan Chen and Hanna Matusik and Chao Liu and Daniela Rus and Vincent Sitzmann},
-      year={2024},
-      eprint={2407.08722},
-      archivePrefix={arXiv},
-      primaryClass={cs.RO},
-      url={https://arxiv.org/abs/2407.08722}, 
+  title={Unifying 3D Representation and Control of Diverse Robots with a Single Camera},
+  author={Sizhe Lester Li and Annan Zhang and Boyuan Chen and Hanna Matusik and Chao Liu and Daniela Rus and Vincent Sitzmann},
+  year={2024},
+  eprint={2407.08722},
+  archivePrefix={arXiv},
+  primaryClass={cs.RO},
+  url={https://arxiv.org/abs/2407.08722},
 }
 ```
 
-## Acknowledgements
+## 🙏 Acknowledgements
 
 The authors thank Hyung Ju Terry Suh for his writing suggestions (system dynamics) and Tao Chen and Pulkit Agrawal for their hardware support on the Allegro hand.
 V.S. acknowledges support from the Solomon Buchsbaum Research Fund through MIT’s Research Suppport Committee. 
