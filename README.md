@@ -84,19 +84,17 @@ Replace the following with your downloaded directories
 ![FingerExample](https://github.com/user-attachments/assets/3cd3014c-a755-47e8-9375-f84e2a4bc542)
 
 **1. Warm-up: Training 2D Jacobian Fields**: please follow the following notebooks
-- `notebooks/tutorial/1_training_pusher_jacobian_in_2D.ipynb`
-- `notebooks/tutorial/2_training_finger_jacobian_in_2D.ipynb`
-- (Upcoming) `notebooks/tutorial/3_controlling_robots_with_2D_jacobian_fields.ipynb`
-- (Upcoming) `notebooks/tutorial/4_jacobian_fields_in_3D.ipynb`
+- **Tutorial 1: Training Jacobian Fields in 2D Pusher Environment** `notebooks/tutorial/1_training_pusher_jacobian_in_2D.ipynb` 
+- **Tutorial 2: Training Jacobian Fields in 2D Finger Environment** `notebooks/tutorial/2_training_finger_jacobian_in_2D.ipynb`
+- **Tutorial 3: Controlling Robot with Jacobian Fields** `notebooks/tutorial/3_training_finger_jacobian_in_2D.ipynb` 
 
 
 ## B. Reproducing real-world experiments 
 
 ### Demos that are directly runnable (no need to train anything!)
 We show how to visualize the learned Jacobian fields and solve for robot commands via inverse dynamics.
-- **1. Visualize Jacobian Fields:** `notebooks/1_visualize_jacobian_fields.ipynb`
-- **2. Inverse Dynamics Optimization:** `notebooks/2_inverse_dynamics_optimization.ipynb`
-- **3. Deployment on real-robot** Upcoming by mid-April 2025!
+- **1. Visualize Jacobian Fields:** `notebooks/real_world/1_visualize_jacobian_fields.ipynb`
+- **2. Inverse Dynamics Optimization:** `notebooks/real_world/2_inverse_dynamics_optimization.ipynb`
 
 ### Dataset requirements
 
