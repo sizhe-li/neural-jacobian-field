@@ -102,7 +102,12 @@ A multiview video-action dataset with camera poses that includes
 ```
 python3 -m neural_jacobian_field.train dataset.mode=perception
 ```
-### B. Train Jacobian Field
+### B. Train Jacobian Fields
+
+- Install TAPIR [here](https://github.com/google-deepmind/tapnet).
+- Use `scripts/dataset/extract_tapir_motion_tracks.py` to extract the motion tracks of the allegro hand. 
+- We are working on a simplified implementation using CoTracker for the motion data extraction process, which will be released before the end of June.
+
 
 Replace the `checkpoint` flag with what you have on wandb :)
 
