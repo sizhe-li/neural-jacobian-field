@@ -5,7 +5,7 @@
 
 > [TL;DR] Neural Jacobian Fields are a general-purpose representation of robotic systems that can be learned from perception.
 
-<img width="960" alt="explainer" src="https://github.com/user-attachments/assets/c3085675-ab92-44d8-82fa-d91f5b46018d" />
+<img width="960" alt="explainer" src="https://github.com/user-attachments/assets/32a8bec9-fee7-4338-ab74-8ffe08fef75a" />
 
 ---
 
