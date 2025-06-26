@@ -100,19 +100,20 @@ A multiview video-action dataset with camera poses that includes
 ### A. Train Perception Module (PixelNeRF)
 
 ```
-python3 -m neural_jacobian_field.train dataset.mode=perception
+python3 -m neural_jacobian_field.train dataset=dataset_allegro model=model_allegro dataset.mode=perception
 ```
 ### B. Train Jacobian Fields
 
+#### Visual motion extraction
 - Install TAPIR [here](https://github.com/google-deepmind/tapnet).
 - Use `scripts/dataset/extract_tapir_motion_tracks.py` to extract the motion tracks of the allegro hand. 
 - We are working on a simplified implementation using CoTracker for the motion data extraction process, which will be released before the end of June.
 
 
-Replace the `checkpoint` flag with what you have on wandb :)
+Replace the `checkpoint` flag with what you have on wandb :) and start training
 
 ```
-python3 -m neural_jacobian_field.train dataset.mode=action checkpoint.load=wandb://entity/project/usoftylr:v5
+python3 -m neural_jacobian_field.train dataset=dataset_allegro model=model_allegro dataset.mode=action checkpoint.load=wandb://entity/project/usoftylr:v5
 ```
 
 ## 🎥 Camera Conventions
