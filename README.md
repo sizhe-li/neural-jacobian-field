@@ -3,17 +3,17 @@
 **Sizhe Lester Li, Annan Zhang, Boyuan Chen, Hanna Matusik, Chao Liu, Daniela Rus, Vincent Sitzmann**  
 📄 [**Paper** (Nature, 2025)](https://www.nature.com/articles/s41586-025-09170-0) | 🌐 [**Project Website**](https://sizhe-li.github.io/publication/neural_jacobian_field/) | 📖 [**Tutorial**](https://sizhe-li.github.io/blog/2025/jacobian-fields-tutorial/) | 🎥 [**Explainer**](https://youtu.be/dFZ1RvJMN7A)
 
-> **Neural Jacobian Fields** are a general-purpose representation of robotic systems that can be learned directly from perception.
+> [TL;DR] Neural Jacobian Fields are a general-purpose representation of robotic systems that can be learned from perception.
 
-![Visualization](https://github.com/user-attachments/assets/62786f4c-94e9-48b0-a924-d50d92aaa0a9)
+https://github.com/user-attachments/assets/62786f4c-94e9-48b0-a924-d50d92aaa0a9
 
 ---
 
 ## 📢  Announcements
 
-- **[2025-06-25]** Our paper is now published in [**Nature**](https://www.nature.com/articles/s41586-025-09170-0)! 🎉  
-- **[2025-04-20]** Dataset now live on HuggingFace: [Link](https://huggingface.co/datasets/sizhe-lester-li/neural-jacobian-field)  
-- **[2025-03-23]** Major tutorial updates for training in 2D simulations
+- **[2025-06-25]** Our paper is now published in [**Nature**](https://www.nature.com/articles/s41586-025-09170-0).
+- **[2025-04-20]** Dataset now live on HuggingFace: [Link](https://huggingface.co/datasets/sizhe-lester-li/neural-jacobian-field).
+- **[2025-03-23]** Major tutorial updates for training in 2D simulations.
 
 ---
 
