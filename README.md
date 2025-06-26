@@ -23,7 +23,7 @@ We provide python implementations of
 - A customized mujoco simulator [[github repo]](https://github.com/sizhe-li/mujoco-phys-sim.git) for simulated experiments in 2D and 3D: `mujoco-phys-sim`
 
 
-## Installation 
+# Installation 
 
 ### Prerequisites
 You must have an NVIDIA video card with CUDA installed on the system. This library has been tested with version 11.8 of CUDA. 
@@ -43,8 +43,7 @@ pip install ninja git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindi
 pip install git+https://github.com/sizhe-li/nerfstudio.git
 ```
 
-
-### 2. Install customized mujoco wrapper for simulated experiments [[github repo]](https://github.com/sizhe-li/mujoco-phys-sim.git)
+### 2. For simulated experiments, install our specialized simulator [[github repo]](https://github.com/sizhe-li/mujoco-phys-sim.git)
 
 ```bash
 git submodule update --init --recursive
@@ -57,7 +56,6 @@ cd mujoco-phys-sim/phys_sim
 pip install -r requirements.txt
 pip install -e .
 ```
-
 
 ### 3. Install Jacobian Fields
 
