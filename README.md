@@ -81,8 +81,8 @@ Tutorial Notebooks (2D, ~30 mins each)
 ## 🦾 Real-World Experiments
 
 ## ✔️ Ready-to-Run Demos
-- 📊 Visualize Jacobian Fields
-- 🎯 Inverse Dynamics Optimization
+- 📊 [Visualize Jacobian Fields](https://github.com/sizhe-li/neural-jacobian-field/blob/main/notebooks/real_world/1_visualize_jacobian_fields.ipynb)
+- 🎯 [Inverse Dynamics Optimization](https://github.com/sizhe-li/neural-jacobian-field/blob/main/notebooks/real_world/2_inverse_dynamics.ipynb)
 
 ## 📦 Dataset (HuggingFace)
 
