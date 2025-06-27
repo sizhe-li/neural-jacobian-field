@@ -126,15 +126,23 @@ python3 -m neural_jacobian_field.train dataset=dataset_allegro model=model_alleg
 If you find our work useful, please consider citing us:
 
 ```
-@misc{li2024unifying3drepresentationcontrol,
-  title={Unifying 3D Representation and Control of Diverse Robots with a Single Camera},
-  author={Sizhe Lester Li and Annan Zhang and Boyuan Chen and Hanna Matusik and Chao Liu and Daniela Rus and Vincent Sitzmann},
-  year={2024},
-  eprint={2407.08722},
-  archivePrefix={arXiv},
-  primaryClass={cs.RO},
-  url={https://arxiv.org/abs/2407.08722},
-}
+  @Article{Li2025,
+        author={Li, Sizhe Lester
+        and Zhang, Annan
+        and Chen, Boyuan
+        and Matusik, Hanna
+        and Liu, Chao
+        and Rus, Daniela
+        and Sitzmann, Vincent},
+        title={Controlling diverse robots by inferring Jacobian fields with deep networks},
+        journal={Nature},
+        year={2025},
+        month={Jun},
+        day={25},
+        issn={1476-4687},
+        doi={10.1038/s41586-025-09170-0},
+        url={https://doi.org/10.1038/s41586-025-09170-0}
+        }
 ```
 
 ## 🙏 Acknowledgements

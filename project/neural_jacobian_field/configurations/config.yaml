@@ -1,6 +1,6 @@
 defaults:
-  - dataset: dataset_toy_arm
-  - model: model_toy_arm
+  - dataset: dataset_allegro
+  - model: model_allegro
 
 wandb:
   name: jacobian_fields
