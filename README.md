@@ -86,7 +86,7 @@ Tutorial Notebooks (2D, ~30 mins each)
 
 ## 📦 Dataset (HuggingFace)
 
-### [Neural Jacobian Field Dataset]((https://huggingface.co/datasets/sizhe-lester-li/neural-jacobian-field))
+### [Neural Jacobian Field Dataset](https://huggingface.co/datasets/sizhe-lester-li/neural-jacobian-field)
 
 A multiview video-action dataset with camera poses that includes
 - Pneumatic robot hand (on robot arm)
