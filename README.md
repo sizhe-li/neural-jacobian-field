@@ -1,7 +1,7 @@
 # Neural Jacobian Fields
 
 **Sizhe Lester Li, Annan Zhang, Boyuan Chen, Hanna Matusik, Chao Liu, Daniela Rus, Vincent Sitzmann**  
-📄 [**Paper** (Nature, 2025)](https://www.nature.com/articles/s41586-025-09170-0) | 🌐 [**Project Website**](https://sizhe-li.github.io/publication/neural_jacobian_field/) | 📖 [**Tutorial**](https://sizhe-li.github.io/blog/2025/jacobian-fields-tutorial/) | 🎥 [**Explainer**](https://youtu.be/dFZ1RvJMN7A)
+📄 [**Paper** (Nature, 2025)](https://www.nature.com/articles/s41586-025-09170-0) | 🌐 [**Project Website**](https://sizhe-li.github.io/publication/neural_jacobian_field/) | 📖 [**Tutorial**](https://sizhe-li.github.io/blog/2025/jacobian-fields-tutorial/) | 🎥 [**Explainer**](https://youtu.be/dFZ1RvJMN7A) | 📦[**Dataset**](https://huggingface.co/datasets/sizhe-lester-li/neural-jacobian-field)
 
 > [TL;DR] Neural Jacobian Fields are a general-purpose representation of robotic systems that can be learned from perception.
 
