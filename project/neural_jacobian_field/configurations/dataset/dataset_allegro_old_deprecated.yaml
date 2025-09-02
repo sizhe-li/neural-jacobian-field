@@ -1,0 +1,21 @@
+name: allegro
+mode: perception
+
+root: "/weka/scratch/user/sizhe086/project/data/neural_jacobian_field/allegro/allegro_11_06_24"
+other_roots: null
+
+num_total_joints: 16
+disabled_joints: [0, 3, 4, 7, 8, 11, 12, 13]
+
+# creating supervision
+max_frame_displacement: 1
+max_num_frames_per_traj: 10
+action_supervision_type: "tracks"
+
+num_positive_samples: 256
+num_negative_samples: 256
+
+augment_ctxt_image: True
+augment_lighting: True
+
+testing_mask_ratio: null

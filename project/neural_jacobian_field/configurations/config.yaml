@@ -17,13 +17,13 @@ training:
   data:
     batch_size: 7
     num_workers: 16
-    rays_per_batch: 1024
+    rays_per_batch: 256
   optim:
     lr: 1e-4
     warm_up_steps: 10000
 
   val_check_interval: 1000
-  max_steps: 50000000  # 50 million steps
+  max_steps: 50000000 # 50 million steps
 
 validation:
   data:
@@ -38,4 +38,3 @@ validation:
 checkpoint:
   every_n_train_steps: 5000
   load: null
-

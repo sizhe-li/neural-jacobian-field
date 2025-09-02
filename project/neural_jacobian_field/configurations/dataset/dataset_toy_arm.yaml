@@ -12,8 +12,8 @@ max_frame_displacement: 1
 max_num_frames_per_traj: 9
 action_supervision_type: "tracks"
 
-num_positive_samples: 512
-num_negative_samples: 512
+num_positive_samples: 256
+num_negative_samples: 256
 
 augment_ctxt_image: false
 testing_mask_ratio: null

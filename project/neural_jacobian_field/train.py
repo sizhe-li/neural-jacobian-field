@@ -22,7 +22,7 @@ from .utils.wandb_logger import SpaceEfficientWandbLogger
 
 @hydra.main(
     version_base=None,
-    config_path="../configurations",
+    config_path="configurations",
     config_name="config",
 )
 def train(cfg: DictConfig):

@@ -11,6 +11,7 @@
 
 ## 📢  Announcements
 
+- **[2025-08-29]** Released the [Allegro-Hand-Only Dataset](https://huggingface.co/datasets/sizhe-lester-li/neural-jacobian-field-allegro-only) — a lighter version containing only the Allegro Hand, making it much faster to download.
 - **[2025-06-25]** Our paper is now published in [**Nature**](https://www.nature.com/articles/s41586-025-09170-0).
 - **[2025-04-20]** Dataset now live on HuggingFace: [Link](https://huggingface.co/datasets/sizhe-lester-li/neural-jacobian-field).
 - **[2025-03-23]** Major tutorial updates for training in 2D simulations.
@@ -36,27 +37,7 @@ conda activate neural-jacobian-field
 #### 2. Install Dependencies (CUDA 11.8)
 
 ```
-pip install torch==2.1.2+cu118 torchvision==0.16.2+cu118 --extra-index-url https://download.pytorch.org/whl/cu118
-conda install -c "nvidia/label/cuda-11.8.0" cuda-toolkit
-pip install ninja git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch
-pip install git+https://github.com/sizhe-li/nerfstudio.git
-```
-
-#### 3. Install Simulator
-
-```
-git submodule update --init --recursive
-cd mujoco-phys-sim/phys_sim
-pip install -r requirements.txt
-pip install -e .
-```
-
-#### 4. Install Jacobian Fields Codebase
-
-```
-cd project
-pip install -r requirements_new.txt
-pip install -e .
+bash install.sh
 ```
 
 ## ▶️ Running the Code
@@ -80,20 +61,25 @@ Tutorial Notebooks (2D, ~30 mins each)
 
 ## 🦾 Real-World Experiments
 
-## ✔️ Ready-to-Run Demos
+✔️ Ready-to-Run Demos
 - 📊 [Visualize Jacobian Fields](https://github.com/sizhe-li/neural-jacobian-field/blob/main/notebooks/real_world/1_visualize_jacobian_fields.ipynb)
 - 🎯 [Inverse Dynamics Optimization](https://github.com/sizhe-li/neural-jacobian-field/blob/main/notebooks/real_world/2_inverse_dynamics.ipynb)
 
 ## 📦 Dataset (HuggingFace)
 
-### [Neural Jacobian Field Dataset](https://huggingface.co/datasets/sizhe-lester-li/neural-jacobian-field)
+We provide two datasets depending on your needs:
 
-A multiview video-action dataset with camera poses that includes
-- Pneumatic robot hand (on robot arm)
-- Allegro robot hand
-- Handed Shearing Auxetics platform
-- Poppy robot arm
+### 1. [Allegro-Only Dataset](https://huggingface.co/datasets/sizhe-lester-li/neural-jacobian-field-allegro-only)  
+✨ **Recommended** — lightweight, faster to download and work with.
 
+---
+
+### 2. [Full Neural Jacobian Field Dataset](https://huggingface.co/datasets/sizhe-lester-li/neural-jacobian-field)  
+A comprehensive **multiview video-action dataset** with camera poses, containing:  
+- 🤖 Pneumatic robot hand (mounted on robot arm)  
+- ✋ Allegro robot hand  
+- 🧩 Handed Shearing Auxetics platform  
+- 🦾 Poppy robot arm  
 
 ## 🏋️‍♀️ Training
 
@@ -103,12 +89,6 @@ A multiview video-action dataset with camera poses that includes
 python3 -m neural_jacobian_field.train dataset=dataset_allegro model=model_allegro dataset.mode=perception
 ```
 ### B. Train Jacobian Fields
-
-#### Visual motion extraction
-- Install TAPIR [here](https://github.com/google-deepmind/tapnet).
-- Use `scripts/dataset/extract_tapir_motion_tracks.py` to extract the motion tracks of the allegro hand. 
-- We are working on a simplified implementation using CoTracker for the motion data extraction process, which will be released before the end of June.
-
 
 Replace the `checkpoint` flag with what you have on wandb :) and start training
 

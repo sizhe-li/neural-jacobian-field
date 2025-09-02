@@ -1,14 +1,13 @@
+from pathlib import Path
+
 import hydra
 import torch
-
-from pathlib import Path
 from colorama import Fore
-from omegaconf import DictConfig, OmegaConf
-from jaxtyping import install_import_hook
-from pytorch_lightning import Trainer
-
-from jacobian.models.model_wrapper_base import get_wrapper
 from jacobian.config.common import PipelineCfg, get_typed_root_config
+from jacobian.models.model_wrapper_base import get_wrapper
+from jaxtyping import install_import_hook
+from omegaconf import DictConfig, OmegaConf
+from pytorch_lightning import Trainer
 
 
 def cyan(text: str) -> str:
@@ -23,7 +22,11 @@ with install_import_hook(
     from jacobian.utils.wandb_logger import SpaceEfficientWandbLogger
 
 
-@hydra.main(version_base=None, config_path="./configurations", config_name="config")
+@hydra.main(
+    version_base=None,
+    config_path="configurations",
+    config_name="config",
+)
 def train(cfg: DictConfig) -> None:
 
     # Set up the output directory.

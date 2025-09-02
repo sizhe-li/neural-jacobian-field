@@ -160,3 +160,5 @@ model_checkpoints/
 outputs/
 checkpoints/
 training_data/
+
+debug_tapir/

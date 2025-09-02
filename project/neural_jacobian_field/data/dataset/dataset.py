@@ -1,9 +1,9 @@
 import random
+from abc import ABC, abstractmethod
 from copy import deepcopy
 from dataclasses import dataclass
 from pathlib import Path
-from typing import List, Literal, Dict, Tuple, Generic, TypeVar
-from abc import ABC, abstractmethod
+from typing import Dict, Generic, List, Literal, Tuple, TypeVar
 
 import numpy as np
 import torch
@@ -13,15 +13,15 @@ from nerfstudio.utils import poses as pose_utils
 from torch import Tensor
 from torch.utils.data import Dataset
 
+from ...rendering.geometry import get_pixel_coordinates
+from ...utils import convention, io_utils, misc
 from .config_parser import (
+    Cameras,
     DNeRFDataParser,
     DNeRFDataParserConfig,
     DNeRFDataParserOutputs,
-    Cameras,
 )
 from .image_augmentation import RandomBackground, ZeroMaskPatchedImage
-from ...rendering.geometry import get_pixel_coordinates
-from ...utils import io_utils, convention, misc
 
 Stage = Literal["train", "val", "test"]
 
