@@ -72,6 +72,11 @@ We provide two datasets depending on your needs:
 ### 1. [Allegro-Only Dataset](https://huggingface.co/datasets/sizhe-lester-li/neural-jacobian-field-allegro-only)  
 ✨ **Recommended** — lightweight, faster to download and work with.
 
+Command to download: 
+```
+huggingface-cli download --resume-download --repo-type dataset sizhe-lester-li/neural-jacobian-field-allegro-only
+```
+
 ---
 
 ### 2. [Full Neural Jacobian Field Dataset](https://huggingface.co/datasets/sizhe-lester-li/neural-jacobian-field)  
@@ -80,6 +85,12 @@ A comprehensive **multiview video-action dataset** with camera poses, containing
 - ✋ Allegro robot hand  
 - 🧩 Handed Shearing Auxetics platform  
 - 🦾 Poppy robot arm  
+
+Command to download: 
+```
+huggingface-cli download --resume-download --repo-type dataset sizhe-lester-li/neural-jacobian-field
+```
+
 
 ## 🏋️‍♀️ Training
 
