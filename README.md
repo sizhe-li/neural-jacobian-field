@@ -11,7 +11,7 @@
 
 ## 📢  Announcements
 
-- **[2025-09-23]** Added [FAQ](#faq-training-allegro-hand-models) about training time and supervision types.
+- **[2025-09-23]** Added [FAQ](#faq) about training time and supervision types.
 - **[2025-08-29]** Released the [Allegro-Hand-Only Dataset](https://huggingface.co/datasets/sizhe-lester-li/neural-jacobian-field-allegro-only) — a lighter version containing only the Allegro Hand, making it much faster to download.
 - **[2025-06-25]** Our paper is now published in [**Nature**](https://www.nature.com/articles/s41586-025-09170-0).
 - **[2025-04-20]** Dataset now live on HuggingFace: [Link](https://huggingface.co/datasets/sizhe-lester-li/neural-jacobian-field).
@@ -113,7 +113,7 @@ python3 -m neural_jacobian_field.train dataset=dataset_allegro model=model_alleg
 (+Z = look vector, +X = right, –Y = up)
 - Intrinsics: Normalized (row 1 ÷ width, row 2 ÷ height)
 
-## FAQ: Training Allegro Hand Models
+## FAQ
 
 ### Q: Training seems extremely slow (e.g., 1300 hours estimated on an NVIDIA A40). Is this normal?
 Yes, everything is fine! The number of training steps in the default config (**50 million**) is somewhat arbitrary. In practice, you can stop once you see good 3D reconstruction results during stage 1 (PixelNeRF), and then move on to fitting Jacobian fields. You usually don’t need to run the full 50M steps.
