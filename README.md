@@ -11,6 +11,7 @@
 
 ## 📢  Announcements
 
+- **[2025-09-23]** Added [FAQ](#faq-training-allegro-hand-models) about training time and supervision types.
 - **[2025-08-29]** Released the [Allegro-Hand-Only Dataset](https://huggingface.co/datasets/sizhe-lester-li/neural-jacobian-field-allegro-only) — a lighter version containing only the Allegro Hand, making it much faster to download.
 - **[2025-06-25]** Our paper is now published in [**Nature**](https://www.nature.com/articles/s41586-025-09170-0).
 - **[2025-04-20]** Dataset now live on HuggingFace: [Link](https://huggingface.co/datasets/sizhe-lester-li/neural-jacobian-field).
@@ -112,6 +113,37 @@ python3 -m neural_jacobian_field.train dataset=dataset_allegro model=model_alleg
 (+Z = look vector, +X = right, –Y = up)
 - Intrinsics: Normalized (row 1 ÷ width, row 2 ÷ height)
 
+## FAQ: Training Allegro Hand Models
+
+### Q: Training seems extremely slow (e.g., 1300 hours estimated on an NVIDIA A40). Is this normal?
+Yes, everything is fine! The number of training steps in the default config (**50 million**) is somewhat arbitrary. In practice, you can stop once you see good 3D reconstruction results during stage 1 (PixelNeRF), and then move on to fitting Jacobian fields. You usually don’t need to run the full 50M steps.
+
+---
+
+### Q: What hardware did you use for training?
+We tested training on:
+- **4 × A8000s**
+- **4 × A100s**
+
+For testing on a local robot-ready PC after training, we used a **single RTX 4090**.
+
+---
+
+### Q: Can I train with multiple GPUs?
+Yes. The training script supports multi-GPU setups. By default, the script will use all available GPUs. You can set `CUDA_VISIBLE_DEVICES` to select specific GPUs. We recommend multi-GPU for large-scale training, especially with the full dataset.
+
+---
+
+### Q: My run goes out-of-memory (OOM) even with small `rays_per_batch`. Why?
+This usually happens if `action_supervision_type` is set to `tracks`.
+
+- In **track supervision**, `rays_per_batch` is **ignored**.  
+- Instead, the number of rays is determined by: `num_positive_samples` + `num_negative_samples`. If both values are `null` (default), the dataloader uses **all tracks** (often ~10,000 rays), which easily causes OOM.
+
+---
+
+### Q: What supervision type should I use for the Allegro hand?
+For the Allegro hand dataset, we by default use **optical flow supervision** (via RAFT), *not* track supervision. Both types of supervision have been tested and work well.
 
 ## 📚 Citation
 If you find our work useful, please consider citing us:
