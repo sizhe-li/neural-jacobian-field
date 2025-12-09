@@ -26,9 +26,16 @@ We provide the software implementations of:
 - ✋ 2D Jacobian Field: `project/jacobian`  
 - 🧪 Custom simulator: [`mujoco-phys-sim`](https://github.com/sizhe-li/mujoco-phys-sim.git)
 
-### 📦 Installation
+## 📦 Installation
 
-Run `git submodule update --init --recursive` to initialize the custom simulator `mujoco-phys-sim`.
+### ✅ Clone & Initialize Submodules (Required)
+
+This repository depends on a custom simulator included as a Git submodule.  
+After cloning, **you must initialize it with:**
+
+```bash
+git submodule update --init --recursive
+```
 
 #### 1. Create Conda Environment
 
@@ -37,10 +44,23 @@ conda create --name neural-jacobian-field python=3.10.8
 conda activate neural-jacobian-field
 ```
 
-#### 2. Install Dependencies (CUDA 11.8)
-
+#### 2. Install Dependencies
 ```
 bash install.sh
+```
+
+This script:
+- Installs PyTorch 
+- Pins NumPy for binary compatibility
+- Installs Nerfstudio + TinyCudaNN
+- jBuilds and installs the MuJoCo simulator
+- Installs all Jacobian Field packages in editable mode
+
+#### 3. Sanity Check (Recommended)
+
+After installation:
+```
+python3 -c "import torch, jacobian, neural_jacobian_field, raft_wrapper; print('✅ Installation OK')"
 ```
 
 ## ▶️ Running the Code
@@ -52,6 +72,8 @@ Download from [Google Drive](https://drive.google.com/drive/folders/1fq0nngkeRWh
 notebooks/inference_demo_data/real_world_pretrained_ckpts
 notebooks/tutorial/tutorial_pretrained_ckpts
 ```
+
+Disclaimer on 2D toy examples: since mujoco has updated its renderer recently. The old checkpoint might not generalize to the new rendering style. It is best to retrain the model yourself after generating the 2D datasets!
 
 ## 🧪 Simulated Experiments
 ![FingerExample](https://github.com/user-attachments/assets/3cd3014c-a755-47e8-9375-f84e2a4bc542)
