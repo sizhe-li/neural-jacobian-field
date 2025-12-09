@@ -28,6 +28,8 @@ We provide the software implementations of:
 
 ### 📦 Installation
 
+Run `git submodule update --init --recursive` to initialize the custom simulator `mujoco-phys-sim`.
+
 #### 1. Create Conda Environment
 
 ```bash
