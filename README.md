@@ -97,8 +97,6 @@ huggingface-cli download --resume-download --repo-type dataset sizhe-lester-li/n
 
 ## 🏋️‍♀️ Training
 
-**On a 4 x A8000s server, perception training takes 1 day, and Jacobian training takes 12 hours to 1 day.**
-
 ### A. Train Perception Module (PixelNeRF)
 
 ```
